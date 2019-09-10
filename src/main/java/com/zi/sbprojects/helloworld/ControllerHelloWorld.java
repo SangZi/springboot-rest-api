@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /* In browser enter this url:
  * http://localhost:8080/hellodenis
- * String "Hello Denis!" shoudl be shown
+ * String "Hello Denis!" should be shown
  */
 
 @RestController
