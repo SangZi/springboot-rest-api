@@ -3,7 +3,10 @@ package com.zi.sbprojects.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +27,10 @@ public class ControllerShipments {
 	@Autowired
 	private ShipmentService shipmentService;
 	
-	//If Request Method not specified, default is GET
-	@RequestMapping("/shipments")
+	/*If Request Method not specified, default is GET. It can also be written as:
+	/*@RequestMapping("/shipments")
+	 */
+	@GetMapping("/shipments")
 	public List<Shipment> getAllShipments(){
 		return shipmentService.getAllShipments();
 	}
@@ -35,18 +40,22 @@ public class ControllerShipments {
 		return shipmentService.getShipmentByShipmentId(shipmentId);
 	}
 
-	@RequestMapping(method=RequestMethod.POST, value="/shipments")
+	/* Both ways are correct as annotation for HTTP-Request-Method
+	 * @RequestMapping(method=RequestMethod.POST, value="/shipments")
+	 */
+	@PostMapping("/shipments")
 	public void addShipment(@RequestBody Shipment shipment) {
 		shipmentService.addShipment(shipment);
 	}
 	
-	//Find an existing item object by shipmentId, and than replace it with new shipment object
+	//Find an existing item object by shipmentId, and than replace it with new shipment object. 
 	@RequestMapping(method=RequestMethod.PUT, value="/shipments/{shipmentId}")
 	public void updateShipment(@RequestBody Shipment shipment, @PathVariable String shipmentId) {
 		shipmentService.updateShipment(shipment,shipmentId);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/shipments/{shipmentId}")
+	//@RequestMapping(method=RequestMethod.DELETE, value="/shipments/{shipmentId}")
+	@DeleteMapping("/shipments/{shipmentId}")
 	public void deleteShipment(@PathVariable String shipmentId) {
 		shipmentService.deleteShipment(shipmentId);
 	}
