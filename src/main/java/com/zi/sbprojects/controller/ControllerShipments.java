@@ -18,8 +18,7 @@ import com.zi.sbprojects.service.ShipmentService;
 
 /* In browser enter this url:
  * http://localhost:8080/shipments
- * JSON object should be shown
- * my test developmemt branch
+ * JSON object should be shown.
  */
 
 @RestController
