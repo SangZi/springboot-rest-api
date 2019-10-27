@@ -2,6 +2,7 @@ package com.zi.sbprojects.controller;
 
 import java.util.List;
 
+import com.zi.sbprojects.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,13 @@ public class ControllerShipments {
 	//Dependency Injection, Spring creates an instance
 	@Autowired
 	private ShipmentService shipmentService;
+
+	private final ShipmentRepository shipmentRepository;
+
+	@Autowired
+	public ControllerShipments(ShipmentRepository shipmentRepository){
+		this.shipmentRepository = shipmentRepository;
+	}
 	
 	/*If Request Method not specified, default is GET. It can also be written as:
 	/*@RequestMapping("/shipments")

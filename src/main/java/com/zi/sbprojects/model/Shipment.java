@@ -1,5 +1,11 @@
 package com.zi.sbprojects.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name="Shipment")
 public class Shipment {
 
 	private String shipmentId;
@@ -19,7 +25,9 @@ public class Shipment {
 		this.receiverName = receiverName;
 		this.city = city;
 	}
-    
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	public String getShipmentId() {
 		return shipmentId;
 	}
