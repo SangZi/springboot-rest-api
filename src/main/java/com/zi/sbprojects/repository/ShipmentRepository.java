@@ -10,5 +10,5 @@ import java.util.List;
 public interface ShipmentRepository extends CrudRepository<Shipment, String> {
 
     List<Shipment> findAll();
-
+    Shipment findByShipmentId(String Id);
 }

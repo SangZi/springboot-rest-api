@@ -25,7 +25,7 @@ import com.zi.sbprojects.service.ShipmentService;
 @RestController
 public class ControllerShipments {
 		
-	//Dependency Injection, Spring creates an instance
+	//Dependency Injection, Spring creates an instance. Because Shipment service only have 1 constructor, we don't need to write @Autowired
 	@Autowired
 	private ShipmentService shipmentService;
 
@@ -36,27 +36,27 @@ public class ControllerShipments {
 		this.shipmentRepository = shipmentRepository;
 	}
 
-	/*If Request Method not specified, default is GET. It can also be written as:
-        /*@RequestMapping("/shipments")
-         */
-	@GetMapping("/shipments")
-	public List<Shipment> getAllShipments(){
-		return shipmentService.getAllShipments();
-	}
-	
-	@RequestMapping("/shipments/{shipmentId}")
-	public Shipment getShipmentByShipmentId(@PathVariable String shipmentId) {
-		return shipmentService.getShipmentByShipmentId(shipmentId);
-	}
-
-	/* Both ways are correct as annotation for HTTP-Request-Method
+	/*Both ways are correct as annotation for HTTP-Request-Method
 	 * @RequestMapping(method=RequestMethod.POST, value="/shipments")
 	 */
-	@PostMapping("/shipments")
+
+	@PostMapping("/shipment")
 	public void addShipment(@RequestBody Shipment shipment) {
-		shipmentService.addShipment(shipment);
+		shipmentRepository.save(shipment);
 	}
-	
+
+	@GetMapping("/shipments")
+	public List<Shipment> getAllShipments(){
+		return shipmentRepository.findAll();
+	}
+
+	@RequestMapping("/shipment/{shipmentId}")
+	public Shipment getShipmentByShipmentId(@PathVariable String shipmentId) {
+		return shipmentRepository.findByShipmentId(shipmentId);
+	}
+
+	/* To Do
+
 	//Find an existing item object by shipmentId, and than replace it with new shipment object. 
 	@RequestMapping(method=RequestMethod.PUT, value="/shipments/{shipmentId}")
 	public void updateShipment(@RequestBody Shipment shipment, @PathVariable String shipmentId) {
@@ -68,7 +68,8 @@ public class ControllerShipments {
 	public void deleteShipment(@PathVariable String shipmentId) {
 		shipmentService.deleteShipment(shipmentId);
 	}
-	
+
+	 */
 }
 	
 	
