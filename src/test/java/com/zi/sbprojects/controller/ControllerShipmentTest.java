@@ -41,6 +41,10 @@ public class ControllerShipmentTest {
 		mockMvc.perform(get("/shipments"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$[0].shipmentId", is(shipment.getShipmentId())));
+		
+		mockMvc.perform(get("/shipments"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$[0].city", is(shipment.getCity())));
 	}
 	
 }
